@@ -1,4 +1,4 @@
-SANCTION: sanction, motif, created_at, updated_at, end_time
+SANCTION: sanction, motif, created_at, updated_at, end_time, moderator
 has sanction, 11 SANCTION, 0N USER 
 USER: username, password, roles, borderline, created_at
 related to user, 01 USER, 11 ACTION

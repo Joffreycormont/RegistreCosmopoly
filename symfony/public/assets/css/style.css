@@ -2,6 +2,10 @@
     width: 40%;
 }
 
+.title{
+    background-color: #f8995a;
+}
+
 .title-modo{
     color: white;
 }
@@ -24,6 +28,14 @@ a.navbar-brand{
     height: 400px;
     background-image: url('../images/ban.png');
     background-position: center;
+}
+
+.mt-6{
+    margin-top: 8em;
+}
+
+.mb-6{
+    margin-bottom: 8em;
 }
 
 

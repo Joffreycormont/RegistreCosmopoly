@@ -42,10 +42,16 @@ class Sanction
     private $endTime;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $moderator;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="sanctions")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
 
     public function getId(): ?int
     {
@@ -120,6 +126,18 @@ class Sanction
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getModerator(): ?string
+    {
+        return $this->moderator;
+    }
+
+    public function setModerator(string $moderator): self
+    {
+        $this->moderator = $moderator;
 
         return $this;
     }
