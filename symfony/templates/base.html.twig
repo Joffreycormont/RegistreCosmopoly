@@ -42,8 +42,8 @@
         <nav class="navbar--moderation navbar navbar-expand-lg navbar-dark">
                 
                 <div class="row">
-                    <h3 class="col-12">Registre de cosmopoly</h3>
-                    <p class="col-12">Service de modération</p>
+                    <h3 class="col-12 title-modo">Registre de cosmopoly</h3>
+                    <p class="col-12 title-modo">Service de modération</p>
                 </div>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -72,6 +72,15 @@
             </nav>
         {% block body %}
         {% endblock %}
+         <footer class="container-fluid footer mt-5">
+            <div class="row p-3 justify-content-center">
+                <div class="row col-12 justify-content-left">
+                    <a href="" class="btn btn-light mr-1 btn-footer">Discord</a>
+                    <a href="" class="btn btn-light btn-footer">Cosmopoly</a>
+                </div>
+                <img src="{{ asset('assets/images/logowhite.png') }}" alt="">
+            </div>
+         </footer>   
         {% block javascripts %}{% endblock %}
     </body>
 </html>
