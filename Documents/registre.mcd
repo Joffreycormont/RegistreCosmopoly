@@ -1,12 +1,12 @@
 SANCTION: sanction, motif, created_at, updated_at, end_time
-has sanction, ?? SANCTION, ?? USER 
+has sanction, 11 SANCTION, 0N USER 
 USER: username, password, roles, borderline, created_at
-related to user, ?? USER, ?? ACTION
+related to user, 01 USER, 11 ACTION
 ACTION: action, description, created_at, updated_at
 
-has comment, ?? USER, ?? COMMENT
+has comment, 0N USER, 11 COMMENT
 COMMENT: content, created_at, updated_at
-has application, ?? COMMENT, ?? APPLICATION
+has application, 11 COMMENT, 0N APPLICATION
 
 APPLICATION: name, post, content, created_at, updated_at
 
