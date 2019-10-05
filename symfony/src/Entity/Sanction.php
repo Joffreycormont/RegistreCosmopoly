@@ -41,6 +41,12 @@ class Sanction
      */
     private $endTime;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="sanctions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +108,18 @@ class Sanction
     public function setEndTime(\DateTimeInterface $endTime): self
     {
         $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
