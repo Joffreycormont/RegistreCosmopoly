@@ -1,0 +1,13 @@
+SANCTION: sanction, motif, created_at, updated_at, end_time
+has sanction, ?? SANCTION, ?? USER 
+USER: username, password, roles, borderline, created_at
+related to user, ?? USER, ?? ACTION
+ACTION: action, description, created_at, updated_at
+
+has comment, ?? USER, ?? COMMENT
+COMMENT: content, created_at, updated_at
+has application, ?? COMMENT, ?? APPLICATION
+
+APPLICATION: name, post, content, created_at, updated_at
+
+GUIDE: title, content, created_at, updated_at 

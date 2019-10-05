@@ -4,13 +4,13 @@
 
 ## Table user
 
-    - Email, mot de passe, roles, username, borderline(boolean), created_at
+    - username, password, roles, borderline(boolean), created_at
 
 ## Table sanction
 
-    - Relation avec un user, sanction, motif, created_at, updated_at, end
+    - Relation avec un user, sanction, motif, created_at, updated_at, end_time
 
-## Table candidature
+## Table application (candidature)
 
     - relation avec comment, name, post, content
 
@@ -18,7 +18,7 @@
 
     - Relation avec candidature,  relation avec user, content
 
-## Table action (dans un premier temps elle devrait servir pour les users users borderline, pour appliquer des mesures 'correctives' envers un utilisateur précis)
+## Table action (dans un premier temps elle devrait servir pour les users borderlines, pour appliquer des mesures 'correctives' envers un utilisateur précis)
 
     - action, description
 
