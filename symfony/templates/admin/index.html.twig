@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Panel Admin{% endblock %}
+
+{% block body %}
+    <div class="container col-9">
+        <div class="row justify-content-center">
+            <h2 class="mt-5 mb-3">Panel Administrateur</h2>
+        </div>
+        <div class="row justify-content-center p-2">
+            <div class="card col-xl-3 col-md-9 col-sm-12 m-1">
+                <h3>Administrateurs : </h3>
+                {% for admin in adminList %}
+                    <div class="row">
+                        <p class="col-5 mt-2 ml-2">- {{ admin.username }}</p>
+                        {% if is_granted('ROLE_SUPERADMIN') %}
+                            <form action="{{ path("admin_delete") }}" method="POST">
+                                <input type="hidden" name="userId" value="{{ admin.id }}">
+                                <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                            </form>
+                        {% endif %}
+                        <hr>
+                    </div>
+                {% endfor %}
+                {% if adminList == false %}
+                    <p> Liste vide </p>
+            {% endif %}   
+            </div>
+            <div class="card col-xl-3 col-md-9 col-sm-12 m-1">
+                <h3>Modérateurs : </h3>
+                {% for moderator in moderatorList %}
+                    <div class="row">
+                        <p class="col-5 mt-2 ml-2">- {{ moderator.username }}</p>
+                        <form action="{{ path("admin_delete") }}" method="POST">
+                            <input type="hidden" name="userId" value="{{ moderator.id }}">
+                            <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                        </form>
+                        <hr>
+                    </div>
+                {% endfor %}
+                {% if moderatorList == false %}
+                    <p> Liste vide </p>
+                {% endif %}                
+            </div>
+            <div class="card col-xl-3 col-md-9 col-sm-12 m-1">
+                <h3>Assignateurs : </h3>
+                {% for assignator in assignatorList %}
+                    <div class="row">
+                        <p class="col-5 mt-2 ml-2">- {{ assignator.username }}</p>
+                        <form action="{{ path("admin_delete") }}" method="POST">
+                            <input type="hidden" name="userId" value="{{ assignator.id }}">
+                            <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                        </form>
+                        <hr>
+                    </div>
+                {% endfor %}
+                {% if assignatorList == false %}
+                    <p> Liste vide </p>
+                {% endif %}
+            </div>
+        </div>
+        <h3>Ajouter un rôle :</h3>
+        <div class="row justify-content-center">
+            <form class="col-9 col-lg-4 col-sm-10" action="{{ path("admin_addRole") }}" method="POST">
+                <label for="">Utilisateur </label>
+                <select class="form-control" name="userId">
+                    {% for user in userList %}
+                        <option  value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+                <label for="role">Role </label>
+                <select class="form-control" name="role" id="role">
+                        <option value="ROLE_ADMIN">Administrateur</option>
+                        <option value="ROLE_MODERATOR">Modérateur</option>
+                        <option value="ROLE_ASSIGNATOR">Assignateur</option>
+                </select>
+                <button type="submit" class="col-9 col-lg-4 btn btn-primary btn-sm m-2">Ajouter</button>
+            </form>
+        </div>
+
+        <h3>Ajouter un utilisateur en borderline</h3>
+        <div class="row justify-content-center">
+                <div class="card col-xl-3 col-md-9 col-sm-12 m-1">
+                    <h3>Utilisateurs borderline : </h3>
+                    {% for border in borderList %}
+                        <div class="row">
+                            <p class="col-5 mt-2 ml-2">- {{ border.username }}</p>
+                            <form action="{{ path("admin_delete_border") }}" method="POST">
+                                <input type="hidden" name="userId" value="{{ border.id }}">
+                                <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                            </form>
+                            <hr>
+                        </div>
+                    {% endfor %}
+                    {% if borderList == false %}
+                        <p> Liste vide </p>
+                    {% endif %}
+                </div>
+            <form class="col-9 col-lg-4 col-sm-10" action="{{ path("admin_addBorder") }}" method="POST">
+                <label for="">Utilisateur </label>
+                <select class="form-control" name="userId">
+                    {% for user in userList %}
+                        <option  value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="col-9 col-lg-4 btn btn-primary btn-sm m-2">Ajouter</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
