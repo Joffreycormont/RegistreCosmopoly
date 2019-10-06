@@ -68,7 +68,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Identifiants incorrects');
+            throw new CustomUserMessageAuthenticationException('Identifiants invalides');
         }
 
         return $user;
