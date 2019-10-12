@@ -51,6 +51,8 @@ class AdminController extends AbstractController
         $em->persist($currentUser);
         $em->flush();
 
+        $this->addFlash('success', 'L\'utilisateur a bien été supprimé de la liste');
+
         return $this->redirectToRoute("admin");
     }
 
@@ -69,6 +71,8 @@ class AdminController extends AbstractController
 
         $em->persist($currentUser);
         $em->flush();
+
+        $this->addFlash('success', 'L\'utilisateur a bien été supprimé de la liste');
 
         return $this->redirectToRoute("admin");
     }
@@ -90,6 +94,8 @@ class AdminController extends AbstractController
         $em->persist($currentUser);
         $em->flush();
 
+        $this->addFlash('success', 'Le rôle a bien été attribué');
+
 
         return $this->redirectToRoute("admin");
     }
@@ -110,6 +116,8 @@ class AdminController extends AbstractController
         $em->persist($currentUser);
         $em->flush();
 
+        
+        $this->addFlash('success', 'L\'utilisateur a bien été ajouté à la liste des borderlines');
 
         return $this->redirectToRoute("admin");
     }    

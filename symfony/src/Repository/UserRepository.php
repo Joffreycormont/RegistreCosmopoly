@@ -60,4 +60,15 @@ class UserRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
+
+    public function findByUsername($username)
+    {
+        return $this->createQueryBuilder('u')
+        ->select('u.id')
+        ->where('u.username = :username')
+        ->setParameter('username', $username)
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 }

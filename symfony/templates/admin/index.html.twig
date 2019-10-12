@@ -3,6 +3,13 @@
 {% block title %}Registre - Panel Admin{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="container col-9">
         <div class="row justify-content-center">
             <h2 class="mt-5 mb-3">Panel Administrateur</h2>

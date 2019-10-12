@@ -24,17 +24,28 @@
         </div>
 
         <h3>Toutes mes sanctions :</h3>
-        <div class="card">
-            {% for sanction in currentUser.sanctions %}
-                <div class="row">
-
-                    <hr>
-                </div>
-            {% endfor %}
-
-            {% if currentUser.sanctions == null %}
-                <p> Liste vide </p>
-            {% endif %} 
-        </div>
+        <div class="row justify-content-center">
+                {% for sanction in currentUser.sanctions %}
+                    <div class=" m-5 card col-10 col-lg-3">
+                        <h6 class="mt-1"><strong>Pseudo</strong> : {{ sanction.user.username }}</h6>
+                        <p class=""><strong>Sanction</strong> :  {{ sanction.sanction }}</p>
+                        <p class=""><strong>Motif</strong> :  {{ sanction.motif }}</p>
+                        <p class=""><strong>Fin de sanction</strong> :  le {{ sanction.endtime|date('d/m/y') }} à {{ sanction.endtime|date('h') }} h {{ sanction.endtime|date('m') }}</p>
+                        <p class=""><strong>Modérateur</strong> :  {{ sanction.moderator }}</p>
+                        {% if is_granted('ROLE_SUPERADMIN') %}
+                            <div class="row justify-content-center">
+                                <form class="row justify-content-center col-10 col-md-8" action="{{ path("admin_delete") }}" method="POST">
+                                    <input type="hidden" name="userId" value="{{ sanction.id }}">
+                                    <button type="submit" class="col-9 btn btn-danger btn-sm m-2">Supprimer</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        
+            {% if currentUser.sanctions == false %}
+            <p> Liste vide </p>
+            {% endif %}
     </div>
 {% endblock %}

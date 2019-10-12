@@ -12,11 +12,11 @@
     {% endfor %}
     <div class="container col-9">
         <h2 class="mt-5">Ajouter un joueur</h2>
-        <div class="row justify-content-center">
-                {{ form_start(userForm, {'action': path('user'), 'method': 'POST'}) }}
-                    {{ form_row(userForm.username, {'label': 'Pseudo du joueur'}) }}
-                    {{ form_row(userForm.password, {'label': 'Mot de passe'}) }}
-                {{ form_end(userForm) }}
+        <div class="row m-5">
+            {{ form_start(userForm, {'action': path('user'), 'method': 'POST'}) }}
+                {{ form_row(userForm.username, {'label': 'Pseudo du joueur'}) }}
+                {{ form_row(userForm.password, {'label': 'Mot de passe'}) }}
+            {{ form_end(userForm) }}
         </div>
         <em>/!\ Ne pas perdre le mot de passe que vous rentrez, il sera à donner à l'utilisateur pour qu'il puisse se connecter !</em><br>
         <em>Rentrez un mot de passe complexe /!\</em>
