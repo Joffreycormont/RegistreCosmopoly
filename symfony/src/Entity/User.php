@@ -69,6 +69,7 @@ class User implements UserInterface
     {
         $this->sanctions = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int

@@ -1,5 +1,5 @@
 .logo{
-    width: 40%;
+    width: 200px;
 }
 
 .title{
@@ -20,8 +20,16 @@ a.navbar-brand{
     background-color: #50b1ef;
 }
 
+.btn-primary:hover{
+    background-color: #f8995a;
+}
+
 .btn-footer{
     color: #50b1ef;
+}
+
+.logoFooter{
+    width: 200px;
 }
 
 .banniere{
@@ -38,6 +46,11 @@ a.navbar-brand{
     margin-bottom: 10em;
 }
 
+.btn-secondary{
+    background-color: #f8995a;
+    border: none;
+}
+
 hr {
     margin-top: .5rem;
     margin-bottom: .5rem;
@@ -51,35 +64,3 @@ hr {
       text-decoration: underline;
   }
 
-
-
-
-@media screen and (min-width: 768px) and (max-width: 1000px) {
-    *{
-        font-size: 22px;
-    }
-
-    .logo{
-        width: 55%;
-    }
-
-    a.navbar-brand{
-        width: 40%;
-    }
-    
-}
-
-@media screen and (min-width: 320px) and (max-width: 768px) {
-    *{
-        font-size: 19px;
-    }
-
-    .logo{
-        width: 80%;
-    }
-
-    a.navbar-brand{
-        width: 40%;
-    }
-    
-}

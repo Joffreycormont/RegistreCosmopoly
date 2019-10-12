@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Utilisateurs{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container col-9">
+        <h2 class="mt-5">Ajouter un joueur</h2>
+        <div class="row justify-content-center">
+                {{ form_start(userForm, {'action': path('user'), 'method': 'POST'}) }}
+                    {{ form_row(userForm.username, {'label': 'Pseudo du joueur'}) }}
+                    {{ form_row(userForm.password, {'label': 'Mot de passe'}) }}
+                {{ form_end(userForm) }}
+        </div>
+        <em>/!\ Ne pas perdre le mot de passe que vous rentrez, il sera à donner à l'utilisateur pour qu'il puisse se connecter !</em><br>
+        <em>Rentrez un mot de passe complexe /!\</em>
+        <h2 class="mt-5">Liste des utilisateurs</h2>
+        <div class="mt-5 row justify-content-center">
+            {% for user in userList %}
+                <div class="card mb-1 col-10">
+                    <div class="row justify-content-between pr-4">
+                        <p class="col-10 col-md-4 mt-2">{{ user.username }}</p>
+                        <form action="{{ path("profil_user", {'id':  user.id  }) }}" method="POST">
+                            <input type="hidden" name="userId" value="{{ user.id }}">
+                            <button type="submit" class="col-12 btn btn-secondary btn-sm m-2">Profil</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

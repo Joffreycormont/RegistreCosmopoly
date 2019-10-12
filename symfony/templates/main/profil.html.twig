@@ -3,6 +3,38 @@
 {% block title %}Registre - Mon profil{% endblock %}
 
 {% block body %}
+    <div class="container col-9">
+        <h2 class="mt-5">Mon profil</h2>
+        <div class="card p-2 mt-5 mb-5">
+            <h6>- Pseudo : {{ currentUser.username }}</h6>
+            <h6>- Borderline : {% if currentUser.borderline == 0 %} Non {% else %} oui {% endif %}</h6>
+            <h6>- Rôle : 
+                {% if currentUser.roles[0] == "ROLE_USER" %}
+                    Utilisateur
+                {% elseif currentUser.roles[0] == "ROLE_MODERATOR" %}
+                    Modérateur
+                {% elseif currentUser.roles[0] == "ROLE_ASSIGNATOR" %}
+                    Assignateur 
+                {% elseif currentUser.roles[0] == "ROLE_ADMIN" %}
+                    Administrateur
+                {% elseif currentUser.roles[0] == "ROLE_SUPERADMIN" %}
+                    Super-Administrateur
+                {% endif %}
+            </h6>
+        </div>
 
+        <h3>Toutes mes sanctions :</h3>
+        <div class="card">
+            {% for sanction in currentUser.sanctions %}
+                <div class="row">
 
+                    <hr>
+                </div>
+            {% endfor %}
+
+            {% if currentUser.sanctions == null %}
+                <p> Liste vide </p>
+            {% endif %} 
+        </div>
+    </div>
 {% endblock %}
