@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - edit utilisateur{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="container col-9">
+        <h2 class="mt-5">Modifier les informations de {{ username }}</h2>
+        <div class="row m-5">
+            {{ form_start(userForm, {'action': path('profil_user_edit_submit', {id: userId}), 'method': 'POST'}) }}
+                {{ form_row(userForm.username, {'label': 'Nouveau pseudo'}) }}
+                {{ form_row(userForm.password, {'label': 'Nouveau mot de passe'}) }}
+                {{ form_row(userForm.ajouter, {'label': 'Modifier'}) }}
+            {{ form_end(userForm) }}
+        </div>
+    </div>
+{% endblock %}

@@ -92,4 +92,20 @@ class SanctionController extends AbstractController
 
         return $this->redirectToRoute('sanction_list');
     }
+
+    /**
+     * @Route("/moderation/sanction/delete/{id}", name="sanction_delete", methods={"POST"})
+     */
+    public function delete(Sanction $sanction)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($sanction);
+        $em->flush();
+
+        $this->addFlash('success', 'La sanction a bien été supprimée.');
+        
+        return $this->redirectToRoute('sanction_list');
+    }
 }

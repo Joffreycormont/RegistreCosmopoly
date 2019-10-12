@@ -69,4 +69,56 @@ class UserController extends AbstractController
             'currentUser' => $currentUser
         ]);
     }
+
+    /**
+     * @Route("/moderation/profil/utilisateur/edit/{id}", name="profil_user_edit")
+     */
+    public function editProfil(User $user, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+
+        $form = $this->createForm(UserType::class);
+    
+
+        return $this->render('user/edit.html.twig', [
+            'controller_name' => 'Profiluser',
+            'userForm' => $form->createView(),
+            'userId' => $user->getid(),
+            'username' => $user->getUsername()
+        ]);
+    }
+
+        /**
+     * @Route("/moderation/profil/utilisateur/edit/{id}/submit", name="profil_user_edit_submit")
+     */
+    public function editProfilSubmit(User $user, Request $request, UserPasswordEncoderInterface $encoder)
+    {
+
+            $form = $this->createForm(UserType::class, $user);
+    
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $editUser = $form->getData();
+    
+                $clearPassword = $editUser->getPassword();
+                $encodedPassword = $encoder->encodePassword($editUser, $clearPassword);
+    
+                $editUser->setPassword($encodedPassword);
+    
+    
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($editUser);
+                $em->flush();
+    
+                $this->addFlash('success', 'Les modifications ont bien été effectuées');
+    
+                return $this->redirectToRoute('user');
+            }
+
+        return $this->render('user/edit.html.twig', [
+            'controller_name' => 'Profiluser',
+            'userForm' => $form->createView(),
+            'userId' => $user->getid()
+        ]);
+    }
 }

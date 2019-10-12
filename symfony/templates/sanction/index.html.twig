@@ -43,6 +43,9 @@
     <div class="row justify-content-center">
         {% for sanction in sanctionList %}
             <div class=" m-5 card col-10 col-lg-3">
+                {% if sanction.endtime|date('d/m/Y') > "now"|date("d/m/Y")  %}
+                    <p class="mt-1 btn btn-warning">En cours</p>
+                {% endif %}
                 <h6 class="mt-1"><strong>Pseudo</strong> : {{ sanction.user.username }}</h6>
                 <p class=""><strong>Sanction</strong> :  {{ sanction.sanction }}</p>
                 <p class=""><strong>Motif</strong> :  {{ sanction.motif }}</p>
@@ -51,8 +54,7 @@
                 <a class="btn btn-primary" href="{{ path("profil_user", {'id':  sanction.user.id  }) }}">Profil</a>
                 {% if is_granted('ROLE_SUPERADMIN') %}
                     <div class="row justify-content-center">
-                        <form class="row justify-content-center col-10 col-md-8" action="{{ path("admin_delete") }}" method="POST">
-                            <input type="hidden" name="userId" value="{{ sanction.id }}">
+                        <form class="row justify-content-center col-10 col-md-8" action="{{ path("sanction_delete", {id: sanction.id }) }}" method="POST">
                             <button type="submit" class="col-9 btn btn-danger btn-sm m-2">Supprimer</button>
                         </form>
                     </div>
