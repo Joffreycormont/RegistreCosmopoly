@@ -43,7 +43,7 @@
     <div class="row justify-content-center">
         {% for sanction in sanctionList %}
             <div class=" m-5 card col-10 col-lg-3">
-                {% if sanction.endtime|date('d/m/Y') > "now"|date("d/m/Y")  %}
+                {% if date() < date(sanction.endtime) %}
                     <p class="mt-1 btn btn-warning">En cours</p>
                 {% endif %}
                 <h6 class="mt-1"><strong>Pseudo</strong> : {{ sanction.user.username }}</h6>
