@@ -18,7 +18,11 @@
                 <p class=""><strong>Motif</strong> :  {{ sanction.motif }}</p>
                 <p class=""><strong>Fin de sanction</strong> :  le {{ sanction.endtime|date('d/m/y') }} à {{ sanction.endtime|date('h') }} h {{ sanction.endtime|date('m') }}</p>
                 <p class=""><strong>Modérateur</strong> :  {{ sanction.moderator }}</p>
-                <a class="btn btn-primary" href="{{ path("profil_user", {'id':  sanction.user.id  }) }}">Profil</a>
+
+                {% if is_granted('ROLE_MODERATOR') %}
+                    <a class="btn btn-primary" href="{{ path("profil_user", {'id':  sanction.user.id  }) }}">Profil</a>
+                {% endif %}
+
                 {% if is_granted('ROLE_SUPERADMIN') %}
                     <div class="row justify-content-center">
                         <form class="row justify-content-center col-10 col-md-8" action="{{ path("admin_delete") }}" method="POST">

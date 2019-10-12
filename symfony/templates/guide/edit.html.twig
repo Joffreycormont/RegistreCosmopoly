@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Guide de la modération édition{% endblock %}
+
+{% block body %}
+
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        {% if is_granted('ROLE_ADMIN') %}
+            <h2 class="mt-5">Modifier la section</h2>
+            <div class="row m-5">
+                <div class="col-12">
+                    {{ form_start(guideForm, {'action': path('guide_edit', {id: partId}), 'method': 'POST'}) }}
+                        {{ form_row(guideForm.title, {'label': 'Edition du titre de section'}) }}
+                        {{ form_row(guideForm.content, {'label': 'Edition du contenu'}) }}
+                        {{ form_row(guideForm.ajouter, {'label': 'Modifier'}) }}
+                    {{ form_end(guideForm) }}
+                </div>
+            </div>
+        {% endif %}
+ 
+    </div>
+
+{% endblock %}

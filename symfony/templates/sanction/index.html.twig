@@ -14,21 +14,24 @@
 
 <div class=" container col-9">
     
+
     <div class="row">
 
-        <div class="m-5">
-            <h2 class="mt-5 mb-5">Ajouter une sanction</h2>
-            {{ form_start(sanctionForm, {'action': path('sanction_add'), 'method': 'POST'}) }}
-                {{ form_row(sanctionForm.sanction, {'label': 'Sanction'}) }}
-                {{ form_row(sanctionForm.motif, {'label': 'Le motif'}) }}
-                {{ form_row(sanctionForm.endTime, {'label': 'Fin de sanction'}) }}
-                {{ form_row(sanctionForm.user, {'label': 'Utilisateur concerné'}) }}
-                {{ form_row(sanctionForm.ajouter) }}
-            {{ form_end(sanctionForm) }}
-        </div>
+        {% if is_granted('ROLE_MODERATOR') %}
+            <div class="m-5">
+                <h2 class="mt-5 mb-5">Ajouter une sanction</h2>
+                {{ form_start(sanctionForm, {'action': path('sanction_add'), 'method': 'POST'}) }}
+                    {{ form_row(sanctionForm.sanction, {'label': 'Sanction'}) }}
+                    {{ form_row(sanctionForm.motif, {'label': 'Le motif'}) }}
+                    {{ form_row(sanctionForm.endTime, {'label': 'Fin de sanction'}) }}
+                    {{ form_row(sanctionForm.user, {'label': 'Utilisateur concerné'}) }}
+                    {{ form_row(sanctionForm.ajouter) }}
+                {{ form_end(sanctionForm) }}
+            </div>
+        {% endif %}
 
         <div class="m-5">
-            <h2 class="mt-5">Rechercher rapide</h2>
+            <h2 class="mt-5">Recherche rapide</h2>
             <form class="row justify-content-center col-10 col-md-8" action="{{ path('sanction_search') }}" method="POST">
                 <label for="username">Nom du joueur</label>
                 <input type="text" name="username" id="username">
@@ -51,7 +54,10 @@
                 <p class=""><strong>Motif</strong> :  {{ sanction.motif }}</p>
                 <p class=""><strong>Fin de sanction</strong> :  le {{ sanction.endtime|date('d/m/y') }} à {{ sanction.endtime|date('h') }} h {{ sanction.endtime|date('m') }}</p>
                 <p class=""><strong>Modérateur</strong> :  {{ sanction.moderator }}</p>
-                <a class="btn btn-primary" href="{{ path("profil_user", {'id':  sanction.user.id  }) }}">Profil</a>
+                {% if is_granted('ROLE_MODERATOR') %}
+                    <a class="btn btn-primary" href="{{ path("profil_user", {'id':  sanction.user.id  }) }}">Profil</a>
+                {% endif %}
+                
                 {% if is_granted('ROLE_SUPERADMIN') %}
                     <div class="row justify-content-center">
                         <form class="row justify-content-center col-10 col-md-8" action="{{ path("sanction_delete", {id: sanction.id }) }}" method="POST">

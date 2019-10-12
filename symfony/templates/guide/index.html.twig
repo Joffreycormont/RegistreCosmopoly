@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Guide de la modération{% endblock %}
+
+{% block body %}
+
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        {% if is_granted('ROLE_ADMIN') %}
+            <h2 class="mt-5">Ajouter un paragraphe</h2>
+            <div class="row m-5">
+                <div class="col-12">
+                    {{ form_start(guideForm, {'action': path('guide'), 'method': 'POST'}) }}
+                        {{ form_row(guideForm.title, {'label': 'Titre de section'}) }}
+                        {{ form_row(guideForm.content, {'label': 'Contenu'}) }}
+                        {{ form_row(guideForm.ajouter) }}
+                    {{ form_end(guideForm) }}
+                </div>
+            </div>
+        {% endif %}
+
+
+        <h2 class="mt-5">Guide de la modération</h2>
+        <p>Ce guide est à l’attention des nouveaux modérateurs, ou bien même des anciens qui auraient besoin d’une petite piqûre de rappel. Il a vocation à vous aider à cerner ce qu’est la fonction de modérateur sur Cosmopoly et à répondre à vos interrogations. Car ce qui est évident pour certains, ne l’est pas pour d’autres, ce guide liste toutes les fonctions d’un modérateur, ses devoirs et ses droits. Bien sûr, il n’est pas exhaustif, ni inflexible. En cas de questions, n’hésitez pas à en parler au responsable de modération.</p>
+        <hr>
+
+        {% for part in guideList %}
+        <div class="row">
+            <h4 class="col-12">{{ part.title }}</h4>
+            <p class="col-12 ml-3"> {{ part.content|nl2br }} </p>
+            {% if is_granted('ROLE_ADMIN') %}
+
+                <a href="{{ path('guide_edit', {id: part.id }) }}" class="mb-5 mt-2 btn-sm btn-primary">Modifier</a>
+
+                <form action="{{ path('guide_delete', { id: part.id }) }}" method="POST">
+                    <input type="hidden" name="userId" value="">
+                    <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                </form>
+            {% endif %}
+        </div>
+
+        {% endfor %}
+        {% if guideList == false %}
+            <p> Liste vide </p>
+        {% endif %}  
+    </div>
+
+{% endblock %}
