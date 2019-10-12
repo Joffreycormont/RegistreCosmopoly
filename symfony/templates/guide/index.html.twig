@@ -16,7 +16,7 @@
         {% if is_granted('ROLE_ADMIN') %}
             <h2 class="mt-5">Ajouter un paragraphe</h2>
             <div class="row m-5">
-                <div class="col-12">
+                <div class="col-11">
                     {{ form_start(guideForm, {'action': path('guide'), 'method': 'POST'}) }}
                         {{ form_row(guideForm.title, {'label': 'Titre de section'}) }}
                         {{ form_row(guideForm.content, {'label': 'Contenu'}) }}
@@ -32,17 +32,17 @@
         <hr>
 
         {% for part in guideList %}
-        <div class="row">
-            <h4 class="col-12">{{ part.title }}</h4>
-            <p class="col-12 ml-3"> {{ part.content|nl2br }} </p>
+        <div class="row align-items-start">
+            <h4 class="col-12 mt-3">{{ part.title }}</h4>
+            <p class="col-12 col-md-10 ml-3"> {{ part.content|nl2br }} </p>
             {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-1">
+                <a href="{{ path('guide_edit', {id: part.id }) }}" class="ml-3 btn-sm btn-primary">Modifier</a>
 
-                <a href="{{ path('guide_edit', {id: part.id }) }}" class="mb-5 mt-2 btn-sm btn-primary">Modifier</a>
-
-                <form action="{{ path('guide_delete', { id: part.id }) }}" method="POST">
-                    <input type="hidden" name="userId" value="">
-                    <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                <form class="col justify-content-end" action="{{ path('guide_delete', { id: part.id }) }}" method="POST">
+                    <button type="submit" class="mt-2 btn btn-danger btn-sm">Supprimer</button>
                 </form>
+                </div>
             {% endif %}
         </div>
 
