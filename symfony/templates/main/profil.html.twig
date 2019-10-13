@@ -33,7 +33,7 @@
                         <h6 class="mt-1"><strong>Pseudo</strong> : {{ sanction.user.username }}</h6>
                         <p class=""><strong>Sanction</strong> :  {{ sanction.sanction }}</p>
                         <p class=""><strong>Motif</strong> :  {{ sanction.motif }}</p>
-                        <p class=""><strong>Fin de sanction</strong> :  le {{ sanction.endtime|date('d/m/y') }} à {{ sanction.endtime|date('h') }} h {{ sanction.endtime|date('m') }}</p>
+                        <p class=""><strong>Fin de sanction</strong> :  le {{ sanction.endtime|date('d/m/y') }} à {{ sanction.endtime|date('h') }} h {{ sanction.endtime|date('i') }}</p>
                         <p class=""><strong>Modérateur</strong> :  {{ sanction.moderator }}</p>
                     </div>
                 {% endfor %}
