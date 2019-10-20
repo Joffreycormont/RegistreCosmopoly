@@ -36,7 +36,7 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/moderation/sanction, roles: ROLE_ASSIGNATOR }
          - { path: ^/moderation, roles: ROLE_MODERATOR }
-         - { path: ^/profil, roles: ROLE_USER }
+         - { path: ^/mon-profil, roles: ROLE_USER }
 
     role_hierarchy:
         ROLE_SUPERADMIN: ROLE_ADMIN
