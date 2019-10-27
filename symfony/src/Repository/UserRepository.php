@@ -52,6 +52,15 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+    public function getBorderAdmin()
+    {
+        return $this->createQueryBuilder('u')
+        ->where('u.borderline = 1')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     public function getBorder()
     {
         return $this->createQueryBuilder('u')

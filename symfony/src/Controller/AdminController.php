@@ -21,7 +21,7 @@ class AdminController extends AbstractController
         $moderatorList = $this->getDoctrine()->getRepository(User::class)->getModerator();
         $adminList = $this->getDoctrine()->getRepository(User::class)->getAdmin();
 
-        $userBorderline = $this->getDoctrine()->getRepository(User::class)->getBorder();
+        $userBorderline = $this->getDoctrine()->getRepository(User::class)->getBorderAdmin();
         
 
 
