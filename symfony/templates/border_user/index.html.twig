@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BorderUserController!{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <h3 class="mt-5">Utilisateurs borderline : </h3>
+    <div class="row">    
+        {% for border in borderList %}
+            <div class="card col-xl-3 col-md-9 col-sm-12 m-1">
+                <p class="mt-2 ml-2">- {{ border.username }}</p>
+                <form action="{{ path("admin_delete_border") }}" method="POST">
+                    <input type="hidden" name="userId" value="{{ border.id }}">
+                    <p><strong>Action : </strong>
+                        {% for action in border.actions %}
+                            {{ action.action }} / {{ action.description }} </p>
+                        {% endfor %}
+                    <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
+                </form>
+                <hr>
+            </div>
+        {% endfor %}
+        {% if borderList == false %}
+            <p> Liste vide </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

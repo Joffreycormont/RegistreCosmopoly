@@ -56,6 +56,7 @@ class UserRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('u')
         ->where('u.borderline = 1')
+        ->join('u.actions', 'action')
         ->getQuery()
         ->getResult()
         ;

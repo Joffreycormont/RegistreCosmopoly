@@ -55,21 +55,24 @@ class User implements UserInterface
      */
     private $sanctions;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Action", inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $action;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Action", mappedBy="user")
+     */
+    private $actions;
+
+
     public function __construct()
     {
         $this->sanctions = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->createdAt = new \DateTime();
+        $this->actions = new ArrayCollection();
     }
 
     public function __toString()
@@ -217,17 +220,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAction(): ?Action
-    {
-        return $this->action;
-    }
-
-    public function setAction(?Action $action): self
-    {
-        $this->action = $action;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Comment[]
@@ -259,4 +251,36 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Action[]
+     */
+    public function getActions(): Collection
+    {
+        return $this->actions;
+    }
+
+    public function addAction(Action $action): self
+    {
+        if (!$this->actions->contains($action)) {
+            $this->actions[] = $action;
+            $action->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAction(Action $action): self
+    {
+        if ($this->actions->contains($action)) {
+            $this->actions->removeElement($action);
+            // set the owning side to null (unless already changed)
+            if ($action->getUser() === $this) {
+                $action->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

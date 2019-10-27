@@ -37,9 +37,12 @@ class Action
     private $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", mappedBy="action", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="actions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+
 
     public function getId(): ?int
     {
@@ -103,12 +106,8 @@ class Action
     {
         $this->user = $user;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newAction = $user === null ? null : $this;
-        if ($newAction !== $user->getAction()) {
-            $user->setAction($newAction);
-        }
-
         return $this;
     }
+
+
 }
