@@ -14,7 +14,7 @@ class BorderUserController extends AbstractController
     public function index()
     {
 
-        $userBorderline = $this->getDoctrine()->getRepository(User::class)->getBorder();
+        $userBorderline = $this->getDoctrine()->getRepository(User::class)->getBorderAdmin();
 
         return $this->render('border_user/index.html.twig', [
             'controller_name' => 'BorderUserController',

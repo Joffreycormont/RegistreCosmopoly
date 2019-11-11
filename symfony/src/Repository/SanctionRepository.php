@@ -23,7 +23,7 @@ class SanctionRepository extends ServiceEntityRepository
     public function findByDesc()
     {
         return $this->createQueryBuilder('s')
-            ->orderBy('s.id', 'DESC')
+            ->orderBy('s.endTime', 'DESC')
             ->getQuery()
             ->getResult()
         ;

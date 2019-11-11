@@ -19,6 +19,16 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+    public function getAllUsersByASC()
+    {
+        $roles = "ROLE_ASSIGNATOR";
+        return $this->createQueryBuilder('u')
+        ->orderBy('u.username', 'ASC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     public function getAssignator()
     {
         $roles = "ROLE_ASSIGNATOR";

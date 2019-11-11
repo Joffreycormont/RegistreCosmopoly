@@ -45,7 +45,7 @@ class UserController extends AbstractController
 
 
 
-        $userList = $this->getDoctrine()->getRepository(User::class)->findAll();
+        $userList = $this->getDoctrine()->getRepository(User::class)->getAllUsersByASC();
 
 
 

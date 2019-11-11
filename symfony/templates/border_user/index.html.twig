@@ -14,9 +14,13 @@
                 <form action="{{ path("admin_delete_border") }}" method="POST">
                     <input type="hidden" name="userId" value="{{ border.id }}">
                     <p><strong>Action : </strong>
-                        {% for action in border.actions %}
-                            {{ action.action }} / {{ action.description }} </p>
-                        {% endfor %}
+                        {% if border.actions is not empty %}
+                            {% for action in border.actions %}
+                                {{ action.action }} / {{ action.description }} </p>
+                            {% endfor %}
+                        {% else %}
+                            <p>Non défini</p>    
+                        {% endif %}
                     <button type="submit" class="col-12 btn btn-danger btn-sm m-2">Supprimer</button>
                 </form>
                 <hr>
