@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Application;
 use App\Entity\Comment;
 use App\Form\ApplicationType;
-use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,18 +40,12 @@ class ApplicationController extends AbstractController
 
         // Formulaire pour un commentaire
 
-        
-        $formComment = $this->createForm(CommentType::class);
-
-        $formComment->handleRequest($request);
-
         $applicationList = $this->getDoctrine()->getRepository(Application::class)->findAll();
 
         return $this->render('application/index.html.twig', [
             'controller_name' => 'ApplicationController',
             'applicationList' => $applicationList,
             'applicationForm' => $form->createView(),
-            'commentForm' => $formComment->createView()
         ]);
     }
 
@@ -79,7 +72,7 @@ class ApplicationController extends AbstractController
      * 
      * @Route("/moderation/application/{id}/comment/add", name="application_comment_add")
      */
-    public function addComment (Application $application, Comment $comment, Request $request, Security $security){
+    public function addComment (Application $application, Request $request, Security $security){
 
         // Formulaire pour un commentaire
         $content = $request->request->get('content');
@@ -98,9 +91,6 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Nouveaux commentaire ajouté');
-
-
-        
 
         return $this->redirectToRoute('application');
     }
