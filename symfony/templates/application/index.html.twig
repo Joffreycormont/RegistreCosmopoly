@@ -53,13 +53,12 @@
                         </form>
                     </div>
                 
-                    <div class="col-8">
-                        <h3 class="mb-5">Commentaires : </h3>
-                        {% for comment in application.comments %}
-                            <h5>{{ comment.user.username }}</h5>
-                            <p>{{ comment }}</p>
-                        {% endfor %}
-                    </div>
+                    <h3 class="mb-5">Commentaires : </h3>
+                    {% for comment in application.comments %}
+                        <h5>{{ comment.user.username }}</h5>
+                        <p>{{ comment }}</p>
+                    {% endfor %}
+
                 </div>
             {% endfor %}
         </div>
