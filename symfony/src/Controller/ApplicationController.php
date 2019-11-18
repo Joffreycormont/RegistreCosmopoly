@@ -55,10 +55,20 @@ class ApplicationController extends AbstractController
      */
     public function delete (Application $application){
 
+        $applicationComment = $this->getDoctrine()->getRepository(Comment::class)->findByApplication($application->getId());
+
+        //$comment = $application->getComments();
+
+        //dump($comment);exit;
+
         $em = $this->getDoctrine()->getManager();
 
+        foreach($applicationComment as $objectToDelete){
+            $em->remove($objectToDelete);
+        }
         $em->remove($application);
         $em->flush();
+        
 
         $this->addFlash('success', 'La candidature a bien été suprimée');
         
