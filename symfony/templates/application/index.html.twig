@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Candidatures{% endblock %}
+
+{% block body %}
+
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+
+        {% if is_granted('ROLE_ADMIN')  %}
+            <div class="col m-5">
+                {{ form_start(applicationForm, {'action': path('application'), 'method': 'POST'}) }}
+                    {{ form_row(applicationForm.name, {'label': 'Nom du postulant'}) }}
+                    {{ form_row(applicationForm.post, {'label': 'Le poste qu\'il souhaite occuper'}) }}
+                    {{ form_row(applicationForm.content, {'label': 'La candidature'}) }}
+                    {{ form_row(applicationForm.ajouter) }}
+                {{ form_end(applicationForm) }}
+            </div>
+        {% endif %}
+        
+        <div class="row">
+            {% for application in applicationList %}
+                <div class="card p-3 m-5">
+                    <p><strong>Nom du postulant </strong>: {{ application.name }}</p>
+                    <p><strong>Poste recherché</strong>: {{ application.post }}</p>
+                    <p><strong>Candidature </strong>: {{ application.content }}</p>
+                    {% if is_granted('ROLE_SUPERADMIN') %}
+                        <div class="row justify-content-center">
+                            <form class="row justify-content-center col-10 col-md-8" action="{{ path("application_delete", {id: application.id }) }}" method="POST">
+                                <button type="submit" class="col-9 btn btn-danger btn-sm m-2">Supprimer</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
