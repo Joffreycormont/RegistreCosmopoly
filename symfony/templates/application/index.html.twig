@@ -32,6 +32,14 @@
             {% endif %}
             {% for application in applicationList %}
                 <div class="card col-12 p-3 m-5">
+                    <div class="row p-2">
+                        <p class="counter">{{ application.counter }}</p>
+                        <div class="col-3 align-self-start">
+                            <form action="{{ path('vote', {id : application.id}) }}">
+                                <button class="btn btn-dark">Je vote</button>
+                            </form>
+                        </div>
+                    </div>
                     <p><strong>Nom du postulant </strong>: {{ application.name }}</p>
                     <p><strong>Poste recherché</strong>: {{ application.post }}</p>
                     <p><strong>Candidature </strong>: {{ application.content }}</p>

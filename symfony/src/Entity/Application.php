@@ -48,10 +48,16 @@ class Application
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true, options={"default" : 0})
+     */
+    private $counter;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->createdAt =  new \DateTime();
+        $this->counter = 0;
     }
 
     public function getId(): ?int
@@ -146,6 +152,18 @@ class Application
                 $comment->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCounter(): ?int
+    {
+        return $this->counter;
+    }
+
+    public function setCounter(?int $counter): self
+    {
+        $this->counter = $counter;
 
         return $this;
     }
