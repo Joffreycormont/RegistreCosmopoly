@@ -64,3 +64,10 @@ hr {
       text-decoration: underline;
   }
 
+  .page {
+    min-height: calc(100vh - 210px);
+  }
+  footer {
+    height:fit-content;
+  }
+

@@ -14,88 +14,93 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{ path('home') }}"><img class="logo" src="{{ asset('assets/images/logo cosmo.png') }}" alt=""></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('home') }}">Accueil</a>
-                    </li>
-                    {% if is_granted('ROLE_USER') %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ app.user.username }}
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ path('profil') }}">Mon profil</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-                            </div>
-                        </li>
-                    {% endif %}
-                    {% if is_granted('ROLE_USER') == false %}
+        <div class="page">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="{{ path('home') }}"><img class="logo" src="{{ asset('assets/images/logo cosmo.png') }}" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                            <a class="nav-link" href="{{ path('home') }}">Accueil</a>
                         </li>
-                    {% endif %}
-              
-                </ul>
-            </div>
-        </nav>
-        <div class="container-fluid title">
-            <h3 class="col-12 title-modo mb-0 pt-1 pb-1">Registre de cosmopoly</h3>
-        </div>
-        {% if is_granted('ROLE_ASSIGNATOR') %}
-            <nav class="navbar--moderation navbar navbar-expand-lg navbar-dark">
-                    
-                    <div class="row">
-                        <p class="col-12 title-modo">Service de modération</p>
-                    </div>
-                    
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            {% if is_granted('ROLE_ADMIN') %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('admin') }}">Administration</a>
-                                </li>
-                            {% endif %}
-
-                            {% if is_granted('ROLE_MODERATOR') %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('guide') }}">Guide</a>
-                                </li>
-                            {% endif %}
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('sanction_list')}}">Sanction</a>
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ app.user.username }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ path('profil') }}">Mon profil</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                                </div>
                             </li>
-
-                            {% if is_granted('ROLE_MODERATOR') %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('application') }}">Candidature</a>
-                                </li>
-                            {% endif %}
-
-                            {% if is_granted('ROLE_MODERATOR') %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('user') }}">Utilisateurs</a>
-                                </li>
-                            {% endif %}
-
+                        {% endif %}
+                        {% if is_granted('ROLE_USER') == false %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('border_user') }}">Borderline</a>
-                            </li>                          
-                        </ul>
-                    </div>
-                </nav>
-            {% endif %}
-        {% block body %}
-        {% endblock %}
-         <footer class="container-fluid footer mt-5">
+                                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                            </li>
+                        {% endif %}
+                
+                    </ul>
+                </div>
+            </nav>
+            <div class="container-fluid title">
+                <h3 class="col-12 title-modo mb-0 pt-1 pb-1">Registre de cosmopoly</h3>
+            </div>
+            {% if is_granted('ROLE_ASSIGNATOR') %}
+                <nav class="navbar--moderation navbar navbar-expand-lg navbar-dark">
+                        
+                        <div class="row">
+                            <p class="col-12 title-modo">Service de modération</p>
+                        </div>
+                        
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('admin') }}">Administration</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_MODERATOR') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('guide') }}">Guide</a>
+                                    </li>
+                                {% endif %}
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('sanction_list')}}">Sanction</a>
+                                </li>
+
+                                {% if is_granted('ROLE_MODERATOR') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('application') }}">Candidature</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_MODERATOR') %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('user') }}">Utilisateurs</a>
+                                    </li>
+                                {% endif %}
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('border_user') }}">Borderline</a>
+                                </li>                          
+                            </ul>
+                        </div>
+                    </nav>
+                {% endif %}
+            <div id="app">
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>  
+        <footer class="container-fluid footer mt-5">
             <div class="row p-3 justify-content-center">
                 <div class="row col-12 justify-content-left">
                     <a href="https://discord.gg/sZNFD8F" target="_blank" title="lien vers le discord de cosmopoly" class="btn btn-light mr-1 btn-footer">Discord</a>
@@ -103,7 +108,8 @@
                 </div>
                 <img class="logoFooter" src="{{ asset('assets/images/logowhite.png') }}" alt="">
             </div>
-         </footer>   
+        </footer> 
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
