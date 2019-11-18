@@ -27,10 +27,11 @@
         
         <div class="row">
             {% for application in applicationList %}
-                <div class="card p-3 m-5">
+                <div class="card col-12 p-3 m-5">
                     <p><strong>Nom du postulant </strong>: {{ application.name }}</p>
                     <p><strong>Poste recherché</strong>: {{ application.post }}</p>
                     <p><strong>Candidature </strong>: {{ application.content }}</p>
+
                     {% if is_granted('ROLE_SUPERADMIN') %}
                         <div class="row justify-content-center">
                             <form class="row justify-content-center col-10 col-md-8" action="{{ path("application_delete", {id: application.id }) }}" method="POST">
@@ -38,6 +39,23 @@
                             </form>
                         </div>
                     {% endif %}
+                    <div> 
+                        <form method="POST" action="{{ path('application_comment_add', {id: application.id} )}}">
+                            <div class="form-group">
+                                <label for="content">Nouveau commentaire</label>
+                                <textarea class="form-control" name="content" id="content" cols="30" rows="6"></textarea>
+                                <button class="mt-3 btn btn-primary" type="submit">Ajouter</button>    
+                            </div>   
+                        </form>
+                    </div>
+                
+                    <div class="col-8">
+                        <h3 class="mb-5">Commentaires : </h3>
+                        {% for comment in application.comments %}
+                            <h5>{{ comment.user.username }}</h5>
+                            <p>{{ comment }}</p>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
