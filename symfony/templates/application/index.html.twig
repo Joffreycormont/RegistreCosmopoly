@@ -26,6 +26,10 @@
         {% endif %}
         
         <div class="row">
+            <h2>Liste des candidatures</h2>
+            {% if applicationList is empty %}
+               <p class="col-12 m-5">Il n'y a aucune candidature pour le moment...</p> 
+            {% endif %}
             {% for application in applicationList %}
                 <div class="card col-12 p-3 m-5">
                     <p><strong>Nom du postulant </strong>: {{ application.name }}</p>
