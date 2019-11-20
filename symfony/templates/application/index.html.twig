@@ -27,15 +27,15 @@
         
         <div class="row">
             <h2 class="m-5">Liste des candidatures</h2>
-            {% for application in applicationList %}
 
-                {% set errorMessage = "" %}
+            {% set errorMessage = "" %}
+
+            {% for application in applicationList %}
 
                 {% if application.status != 1 %}
                     {% set errorMessage = "Il n'y a aucune candidature pour le moment !" %}
                 {% endif %}
 
-                <p class="col-12 m-3">{{ errorMessage }}</p>
 
                 {% if application.status == 1 %}
 
@@ -83,6 +83,10 @@
                     
                 {% endif %}
             {% endfor %}
+
+            {% if applicationList is not empty %}
+                <p class="col-12 m-3 pl-5">{{ errorMessage }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
