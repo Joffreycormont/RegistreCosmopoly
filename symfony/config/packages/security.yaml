@@ -33,11 +33,11 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/admin, roles: ROLE_ADMIN, requires_channel: https }
-         - { path: ^/moderation/sanction, roles: ROLE_ASSIGNATOR, requires_channel: https }
-         - { path: ^/moderation, roles: ROLE_MODERATOR, requires_channel: https }
-         - { path: ^/mon-profil, roles: ROLE_USER, requires_channel: https }
-         - { path: '^/', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+         - { path: ^/admin, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/moderation/sanction, roles: ROLE_ASSIGNATOR, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/moderation, roles: ROLE_MODERATOR, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/mon-profil, roles: ROLE_USER, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: '^/', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
 
     role_hierarchy:

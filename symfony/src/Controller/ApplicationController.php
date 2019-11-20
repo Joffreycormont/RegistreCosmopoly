@@ -49,6 +49,43 @@ class ApplicationController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * @Route("/moderation/application/valid", name="application_valid")
+     */
+    public function valid(Request $request)
+    {
+
+        // Formulaire pour un commentaire
+
+        $applicationList = $this->getDoctrine()->getRepository(Application::class)->findAll();
+
+        return $this->render('application/valid.html.twig', [
+            'controller_name' => 'ApplicationController',
+            'applicationList' => $applicationList,
+        ]);
+    }
+
+
+    /**
+     * @Route("/moderation/application/rejected", name="application_rejected")
+     */
+    public function rejected(Request $request)
+    {
+
+        // Formulaire pour un commentaire
+
+        $applicationList = $this->getDoctrine()->getRepository(Application::class)->findAll();
+
+        return $this->render('application/reject.html.twig', [
+            'controller_name' => 'ApplicationController',
+            'applicationList' => $applicationList,
+        ]);
+    }
+
+
+
     /**
      * 
      * @Route("/moderation/application/delete/{id}", name="application_delete")
@@ -101,6 +138,45 @@ class ApplicationController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Nouveaux commentaire ajouté');
+
+        return $this->redirectToRoute('application');
+    }
+
+    /**
+     * 
+     * @Route("/moderation/application/{id}/valid/status", name="application_valid_status")
+     */
+    public function validStatus (Application $application){
+
+        $application = $this->getDoctrine()->getRepository(Application::class)->find($application);
+
+        $application->setStatus(2);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($application);
+        $em->flush();
+
+        $this->addFlash('success', 'Candidature validée');
+
+        return $this->redirectToRoute('application');
+    }
+
+
+        /**
+     * 
+     * @Route("/moderation/application/{id}/reject/status", name="application_reject_status")
+     */
+    public function rejectStatus (Application $application){
+
+        $application = $this->getDoctrine()->getRepository(Application::class)->find($application);
+
+        $application->setStatus(3);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($application);
+        $em->flush();
+
+        $this->addFlash('success', 'Candidature rejetée');
 
         return $this->redirectToRoute('application');
     }

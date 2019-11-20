@@ -53,11 +53,17 @@ class Application
      */
     private $counter;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->createdAt =  new \DateTime();
         $this->counter = 0;
+        $this->status = 1;
     }
 
     public function getId(): ?int
@@ -164,6 +170,18 @@ class Application
     public function setCounter(?int $counter): self
     {
         $this->counter = $counter;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

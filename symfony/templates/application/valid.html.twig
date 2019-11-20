@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registre - Candidatures{% endblock %}
+
+{% block body %}
+
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        
+        <div class="row">
+            <h2 class="m-5">Liste des candidatures validées</h2>
+            {% for application in applicationList %}
+
+                {% if application.status == 2 %}
+
+                    <div class="card col-12 p-3 m-5">
+                        <p><strong>Nom du postulant </strong>: {{ application.name }}</p>
+                        <p><strong>Poste recherché</strong>: {{ application.post }}</p>
+                        <p><strong>Candidature </strong>: {{ application.content }}</p>
+                    
+                        <h3 class="mb-5">Commentaires : </h3>
+                        {% for comment in application.comments %}
+                            <h5>{{ comment.user.username }}</h5>
+                            <p>{{ comment }}</p>
+                        {% endfor %}
+                    </div>
+                    
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
