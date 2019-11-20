@@ -34,6 +34,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/moderation/application/valid, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/moderation/application/rejected, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation/sanction, roles: ROLE_ASSIGNATOR, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation, roles: ROLE_MODERATOR, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/mon-profil, roles: ROLE_USER, requires_channel: '%env(SECURE_SCHEME)%' }
