@@ -36,9 +36,9 @@ security:
          - { path: ^/admin, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation/application/valid, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation/application/rejected, roles: ROLE_ADMIN, requires_channel: '%env(SECURE_SCHEME)%' }
-         - { path: ^/moderation, roles: ROLE_MODERATOR, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation/sanction, roles: ROLE_ASSIGNATOR, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/moderation/border/user, roles: ROLE_ASSIGNATOR, requires_channel: '%env(SECURE_SCHEME)%' }
+         - { path: ^/moderation, roles: ROLE_MODERATOR, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: ^/mon-profil, roles: ROLE_USER, requires_channel: '%env(SECURE_SCHEME)%' }
          - { path: '^/', roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
 
